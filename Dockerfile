@@ -1,15 +1,22 @@
 FROM node:6
 
-# RUN apt install -y git
-
-RUN cd /usr
+WORKDIR /usr/bin/app
 
 RUN git clone https://github.com/jscad/OpenJSCAD.org
 
-RUN cd OpenJSCAD.org
+#RUN npm install -g @jscad/openjscad
 
-RUN cd packages
+#RUN ls
 
-COPY web /usr/bin/app
+#RUN cd  /usr/bin/app/OpenJSCAD.org/packages/web
 
-COPY ../examples /usr/bin/examples
+WORKDIR /usr/bin/app/OpenJSCAD.org/packages/web
+
+RUN npm install
+
+RUN mkdir examples
+
+RUN cp -r  ../examples/* examples/
+
+CMD npm run start-dev
+
